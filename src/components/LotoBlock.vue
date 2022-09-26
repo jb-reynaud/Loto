@@ -9,100 +9,102 @@
       </p>
     </div>
   </section>
-  <div class="block">
-    <h2>Choisis les 5 numéros</h2>
-    <div class="buttons">
+  <section class="section">
+    <div class="block">
+      <h2>Choisis les 5 numéros</h2>
+      <div class="buttons">
+        <button
+            v-for="i in 49"
+            :key="i"
+            :disabled="!selectedBalls.includes(i) && selectedBalls.length > 4"
+            class="button ball-button"
+            :class="{ 'is-success': selectedBalls.includes(i) }"
+            @click="selectBall(i)"
+        >
+          {{ i }}
+        </button>
+      </div>
+    </div>
+    <div class="block">
+      <h2>Choisis le numéro chance</h2>
+      <div class="buttons">
+        <button
+            v-for="i in 10"
+            :key="i"
+            class="button ball-button"
+            :class="{ 'is-warning': selectedChance === i }"
+            @click="selectChance(i)"
+        >
+          {{ i }}
+        </button>
+      </div>
+    </div>
+    <div v-if="results.length === 0" class="block has-text-centered">
       <button
-        v-for="i in 49"
-        :key="i"
-        :disabled="!selectedBalls.includes(i) && selectedBalls.length > 4"
-        class="button"
-        :class="{ 'is-success': selectedBalls.includes(i) }"
-        @click="selectBall(i)"
+          :disabled="selectedBalls.length !== 5 || selectedChance === null"
+          class="button is-primary"
+          @click="draw"
       >
-        {{ i }}
+        Lancer le tirage<i class="fas fa-underline"></i>
       </button>
     </div>
-  </div>
-  <div class="block">
-    <h2>Choisis le numéro chance</h2>
-    <div class="buttons">
-      <button
-        v-for="i in 10"
-        :key="i"
-        class="button"
-        :class="{ 'is-warning': selectedChance === i }"
-        @click="selectedChance = i"
-      >
-        {{ i }}
-      </button>
-    </div>
-  </div>
-  <div v-if="results.length === 0" class="block has-text-centered">
-    <button
-      :disabled="selectedBalls.length !== 5 && selectedChance === null"
-      class="button is-primary"
-      @click="draw"
-    >
-      Lancer le tirage<i class="fas fa-underline"></i>
-    </button>
-  </div>
-  <div v-else class="block has-text-centered">
-    <div
-      class="notification"
-      :class="{
+    <div v-else class="block has-text-centered">
+      <div
+          class="notification"
+          :class="{
         'is-success': resultsTotal.diff > 0,
         'is-danger': resultsTotal.diff < 0,
       }"
-    >
-      Tu as dépensé
-      <span class="has-text-weight-bold">{{ resultsTotal.outcome }} €</span>
-      pour jouer, tu as gagné
-      <span class="has-text-weight-bold">{{ resultsTotal.wons }}</span> fois
-      pour un montant total de
-      <span class="has-text-weight-bold">{{ resultsTotal.income }}</span> €, tu
-      as maintenant
-      <span class="has-text-weight-bold">{{ resultsTotal.diff }}</span> € ...
-      <a @click="reset">Recommencer?</a>
-    </div>
+      >
+        Tu as dépensé
+        <span class="has-text-weight-bold">{{ resultsTotal.outcome }} €</span>
+        pour jouer, tu as gagné
+        <span class="has-text-weight-bold">{{ resultsTotal.wons }}</span> fois
+        pour un montant total de
+        <span class="has-text-weight-bold">{{ resultsTotal.income }}</span> €, tu
+        as maintenant
+        <span class="has-text-weight-bold">{{ resultsTotal.diff }}</span> € ...
+        <a @click="reset">Recommencer?</a>
+      </div>
 
-    <table class="table">
-      <thead>
+      <table class="table">
+        <thead>
         <tr>
           <th>Date</th>
           <th>Tirage</th>
-          <th>Numéro chance</th>
-          <th>Montant gagné</th>
+          <th>Chance</th>
+          <th>Gain</th>
         </tr>
-      </thead>
-      <tr v-for="result in results" :key="result.annee_numero_de_tirage">
-        <td>
-          {{ result.date_de_tirage }}
-          <span class="tag is-small"
+        </thead>
+        <tr v-for="result in results" :key="result.annee_numero_de_tirage">
+          <td>
+            {{ result.date_de_tirage }}
+            <span class="tag is-small"
             >{{ result.day_draw === 1 ? "1er" : "2ème" }} tirage</span
-          >
-        </td>
-        <td>
+            >
+          </td>
+          <td>
           <span
-            v-for="ball in result.balls"
-            :key="ball"
-            class="tag"
-            :class="{ 'is-success': selectedBalls.includes(ball) }"
-            >{{ ball }}</span
+              v-for="ball in result.balls"
+              :key="ball"
+              class="tag is-small ball-result-tag"
+              :class="{ 'is-success': selectedBalls.includes(ball) }"
+          >{{ ball }}</span
           >
-        </td>
-        <td>
+          </td>
+          <td>
           <span
-            v-if="result.chance"
-            class="tag"
-            :class="{ 'is-warning': result.chance === selectedChance }"
-            >{{ result.chance }}</span
+              v-if="result.chance"
+              class="tag is-small ball-result-tag"
+              :class="{ 'is-warning': result.chance === selectedChance }"
+          >{{ result.chance }}</span
           >
-        </td>
-        <td>{{ result.income }}€</td>
-      </tr>
-    </table>
-  </div>
+          </td>
+          <td>{{ result.income }}€</td>
+        </tr>
+      </table>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -137,6 +139,9 @@ export default {
       }
 
       this.selectedBalls.push(ball);
+    },
+    selectChance(chance) {
+      this.selectedChance = this.selectedChance === chance ? null : chance
     },
     draw() {
       this.results = [];
@@ -247,3 +252,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.ball-button {
+  width: 40px;
+}
+.ball-result-tag {
+  width: 25px;
+}
+</style>
