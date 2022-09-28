@@ -2,6 +2,8 @@
 
 This project is a lottery game based on french Loto past results.
 
+https://loto-jb.netlify.com
+
 ## Project Setup
 
 ```sh
