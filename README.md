@@ -22,4 +22,10 @@ npm run dev
 
 The data came from official french Loto website: https://www.fdj.fr/jeux-de-tirage/loto/historique
 
-To convert them to json format, I used an online converter: https://www.convertcsv.com/csv-to-json.htm
+### Import data
+
+```bash
+brew install -q wget jq vim
+
+sh import-results.sh
+```
