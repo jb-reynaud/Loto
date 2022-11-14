@@ -96,7 +96,7 @@
             <span
               v-if="result.chance"
               class="tag is-small ball-result-tag"
-              :class="{ 'is-warning': result.chance === selectedChance }"
+              :class="{ 'is-warning': parseInt(result.chance) === selectedChance }"
               >{{ result.chance }}</span
             >
           </td>
@@ -159,7 +159,7 @@ export default {
               result.first_draw.draw.filter((ball) =>
                 this.selectedBalls.includes(parseInt(ball))
               ).length -
-            (result.first_draw.chance === this.selectedChance ? 1 : 0),
+            (parseInt(result.first_draw.chance) === this.selectedChance ? 1 : 0),
         });
       });
 
