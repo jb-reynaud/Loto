@@ -1,17 +1,15 @@
 <template>
   <section class="hero">
     <div class="hero-body">
-      <p class="title">Est-ce que tu as gagné au Loto?</p>
+      <p class="title">Have you won the lottery?</p>
       <p class="subtitle">
-        Imagine tu joue les mêmes numéros depuis le 6 mars 2017, soit 1782
-        tirages (2 par soirée de Loto), il y a t'il une chance que tu aies
-        gagné?
+        Imagine you play the same numbers since March 6, 2017, that is 1782 draws (2 per Lotto night), is there any chance you could have win?
       </p>
     </div>
   </section>
   <section class="section">
     <div class="block">
-      <h2>Choisis les 5 numéros</h2>
+      <h2>Choose the 5 numbers</h2>
       <div class="buttons">
         <button
           v-for="i in 49"
@@ -26,7 +24,7 @@
       </div>
     </div>
     <div class="block">
-      <h2>Choisis le numéro chance</h2>
+      <h2>Choose the lucky number</h2>
       <div class="buttons">
         <button
           v-for="i in 10"
@@ -45,7 +43,7 @@
         class="button is-primary"
         @click="draw"
       >
-        Lancer le tirage<i class="fas fa-underline"></i>
+        Start the draw<i class="fas fa-underline"></i>
       </button>
     </div>
     <div v-else class="block has-text-centered">
@@ -56,22 +54,22 @@
           'is-danger': resultsTotal.diff < 0,
         }"
       >
-        Tu as dépensé
+        You spent
         <span class="has-text-weight-bold">{{ resultsTotal.outcome }} €</span>
-        pour jouer, tu as gagné
-        <span class="has-text-weight-bold">{{ resultsTotal.wons }}</span> fois
-        pour un montant total de
+        to play, you won
+        <span class="has-text-weight-bold">{{ resultsTotal.wons }}</span> times
+        for a total amount of
         <span class="has-text-weight-bold">{{ resultsTotal.income }}</span> €,
-        tu as maintenant
+        you've now
         <span class="has-text-weight-bold">{{ resultsTotal.diff }}</span> € ...
-        <a @click="reset">Recommencer?</a>
+        <a @click="reset">Try again?</a>
       </div>
 
       <table class="table is-striped">
         <thead>
           <tr>
             <th>Date</th>
-            <th>Tirage</th>
+            <th>Draw</th>
             <th>Chance</th>
             <th>Gain</th>
           </tr>
@@ -80,7 +78,7 @@
           <td>
             {{ result.date }}
             <span class="tag is-small"
-              >{{ result.day_draw === 1 ? "1er" : "2ème" }} tirage</span
+              >{{ result.day_draw === 1 ? "1st" : "2nd" }} draw</span
             >
           </td>
           <td>
