@@ -2,7 +2,7 @@
 
 This project is a lottery game based on french Loto past results.
 
-https://loto-jb.netlify.com
+https://loto.jbreynaud.com
 
 ## Project Setup
 
