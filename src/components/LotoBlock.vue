@@ -3,7 +3,7 @@
     <div class="hero-body">
       <p class="title">Have you won the lottery?</p>
       <p class="subtitle">
-        Imagine you play the same numbers since March 6, 2017, that is 1782 draws (2 per Lotto night), is there any chance you could have win?
+        Imagine you play the same numbers since March 6, 2017 until October 2, 2025 (last update), that is 892 draws (2 per week), is there any chance you could have win?
       </p>
     </div>
   </section>
