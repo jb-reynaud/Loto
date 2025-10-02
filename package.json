@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bulma": "^1.0.0",
+    "canvas-confetti": "^1.9.3",
     "sass": "^1.80.0",
     "vue": "^3.5.0"
   },

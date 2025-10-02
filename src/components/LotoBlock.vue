@@ -107,6 +107,7 @@
 
 <script>
 import lotoResults from "../statics/lotoResults.json";
+import confetti from "canvas-confetti";
 
 export default {
   data() {
@@ -218,6 +219,11 @@ export default {
       this.resultsTotal.outcome = lotoResults.length * 3;
       this.resultsTotal.diff =
         this.resultsTotal.income - this.resultsTotal.outcome;
+
+      // Trigger confetti if gain is positive
+      if (this.resultsTotal.diff > 0) {
+        this.triggerConfetti();
+      }
     },
     reset() {
       this.selectedBalls = [];
@@ -232,6 +238,13 @@ export default {
       return typeof string === "string"
         ? parseFloat(string.replace(",", "."))
         : string;
+    },
+    triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     },
   },
 };
